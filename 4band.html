@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="common.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+      function calculate(){
+        var b1 = document.getElementById('b1').value
+        var b2 = document.getElementById('b2').value
+        var b3 = document.getElementById('b3').value
+        var b4 = document.getElementById('b4').value
+
+        //Calculate resistance
+        var b1Num = getDigit(b1)
+        var b2Num = getDigit(b2)
+        var b3Num = getMultiple(b3)
+        var b4Num = getTolerance(b4)
+
+        var resistance = calculateResult(b1Num, b2Num, b3Num)
+        var tolerance = b4Num
+
+        document.getElementById('res').innerHTML="Resistance = "+resistance +" ohm"
+        document.getElementById('tol').innerHTML="Tolerance = "+tolerance +"%"
+
+        event.preventDefault()
+      }
+      function getDigit(n){
+        var code = -1;
+            if(n=="black")
+              code = 0
+            else if(n=="brown")
+              code = 1
+            else if(n=="red")
+              code = 2
+            else if(n=="orange")
+              code = 3
+            else if(n=="yellow")
+              code = 4
+            else if(n=="green")
+              code = 5
+            else if(n=="blue")
+              code = 6
+            else if(n=="violet")
+              code = 7
+            else if(n=="gray")
+              code = 8
+            else if(n=="white")
+              code = 9
+            return code
+      }
+      function getMultiple(n){
+        var code = -1;
+        if(n=="black")
+          code = 1
+        else if(n=="brown")
+          code = 10
+        else if(n=="red")
+          code = 100
+        else if(n=="orange")
+          code = 1000
+        else if(n=="yellow")
+          code = 10000
+        else if(n=="green")
+          code = 100000
+        else if(n=="blue")
+          code = 1000000
+        else if(n=="violet")
+          code = 10000000
+        else if(n=="golden")
+          code = 0.1
+        else if(n=="silver")
+            code = 0.01
+        return code;
+      }
+      function getTolerance(n){
+        var code = -1;
+        if(n=="brown")
+          code = 1
+        else if(n=="red")
+          code = 2
+        else if(n=="green")
+         code = 0.5
+        else if(n=="blue")
+          code = 0.25
+        else if(n=="silver")
+         code = 10
+        else if(n=="golden")
+         code = 5
+        else if(n=="violet")
+         code = 0.1
+        else if(n=="gray")
+          code = 0.05
+        return code;
+      }
+      function calculateResult(a, b, c){
+        return ((a*10)+b)*(c)
+      }
+    </script>
+
+    <title>4 Band calculator</title>
+  </head>
+  <body class='bg-dark'>
+    <div class='centered main text-white'>
+        <a href='home.html'>
+          <i class="fa fa-home" style="font-size:30px;"></i>
+        </a>
+        <h1 class='centered'>4 band resistance calculator</h1>
+    </div>
+    <form onsubmit="calculate()">
+        <div class='row'>
+            <div class='col-sm-2 centered'></div>
+            <div class='col-sm-4 centered'>
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-light">
+                        Select band 1 color (Digit)
+                    </div>
+                    <div class="card-body">
+                        <select class="form-select" id='b1'>
+                            <option value="red" selected>Red</option>
+                            <option value="blue">blue</option>
+                            <option value="green">green</option>
+                            <option value="black">black</option>
+                            <option value="brown">brown</option>
+                            <option value="white">white</option>
+                            <option value="orange">orange</option>
+                            <option value="yellow">yellow</option>
+                            <option value="violet">violet</option>
+                            <option value="gray">gray</option>
+                          </select> 
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-4 centered'>
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-light">
+                        Select band 2 color (Digit)
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text">
+                        <select class="form-select" id='b2'>
+                            <option value="red" selected>Red</option>
+                            <option value="blue">blue</option>
+                            <option value="green">green</option>
+                            <option value="black">black</option>
+                            <option value="brown">brown</option>
+                            <option value="white">white</option>
+                            <option value="orange">orange</option>
+                            <option value="yellow">yellow</option>
+                            <option value="violet">violet</option>
+                            <option value="gray">gray</option>
+                          </select> 
+                      </p>
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-2 centered'></div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-2 centered'></div>
+            <div class='col-sm-4 centered'>
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-light">
+                        Select band 3 color (Multiplier)
+                    </div>
+                    <div class="card-body">
+                        <select class="form-select" id='b3'>
+                            <option value="red" selected>Red</option>
+                            <option value="blue">blue</option>
+                            <option value="green">green</option>
+                            <option value="black">black</option>
+                            <option value="brown">brown</option>
+                            <option value="orange">orange</option>
+                            <option value="yellow">yellow</option>
+                            <option value="white">white</option>
+                            <option value="violet">violet</option>
+                            <option value="gray">gray</option>
+                            <option value="golden">golden</option>
+                            <option value="silver">silver</option>
+                        </select>  
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-4 centered'>
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-light">
+                        Select band 4 color (Tolerance)
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text">
+                        <select class="form-select" id='b4'>
+                            <option value="red" selected>Red</option>
+                            <option value="blue">blue</option>
+                            <option value="green">green</option>
+                            <option value="brown">brown</option>
+                            <option value="violet">violet</option>
+                            <option value="gray">gray</option>
+                            <option value="golden">golden</option>
+                            <option value="silver">silver</option>
+                        </select>  
+                      </p>
+                    </div>
+                  </div>
+            </div>
+            <div class='col-sm-2 centered'></div>
+        </div>
+        <div class='centered text-white'>
+            <button type="submit" class="btn btn-success btn-lg">Calculate</button>
+            <div id='res'></div>
+            <div id='tol'></div>
+        </div>
+    </form>
+  </body>
+</html>
